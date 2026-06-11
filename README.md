@@ -1,45 +1,88 @@
-AgenticRAG-Orchestrator
+# 🚀 AgenticRAG-Orchestrator
 
-Autonomous Multi-Agent Compliance Auditing System powered by LangGraph, Gemini, and Vector Databases.
+<div align="center">
 
-Overview
+### Autonomous Multi-Agent Compliance Auditing System
 
-AgenticRAG-Orchestrator is an advanced Agentic Retrieval-Augmented Generation (RAG) framework designed to perform autonomous regulatory and compliance audits.
+*Transforming Traditional RAG into an Intelligent Self-Correcting AI Auditor*
 
-Unlike traditional RAG systems that simply retrieve and summarize documents, this project introduces a multi-agent, self-correcting workflow capable of:
+![Python](https://img.shields.io/badge/Python-3.10+-blue)
+![LangGraph](https://img.shields.io/badge/LangGraph-Agentic%20Workflow-green)
+![Gemini](https://img.shields.io/badge/Google-Gemini-orange)
+![Qdrant](https://img.shields.io/badge/VectorDB-Qdrant-red)
+![FastAPI](https://img.shields.io/badge/API-FastAPI-teal)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-Retrieving relevant information
-Evaluating retrieval quality
-Correcting failed searches
-Cross-referencing multiple knowledge sources
-Generating citation-backed compliance reports
+</div>
 
-The system leverages LangGraph's state-machine architecture to enable iterative reasoning and self-correction before producing a final answer.
+---
 
-Problem Statement
+## 🎯 Vision
 
-Traditional RAG pipelines follow a simple workflow:
+Modern enterprises face an overwhelming challenge: ensuring internal policies comply with ever-evolving regulatory frameworks.
 
+Traditional AI systems can retrieve information, but they cannot independently verify, compare, and reason across multiple sources.
+
+**AgenticRAG-Orchestrator** bridges this gap by introducing a multi-agent, self-correcting RAG architecture capable of acting as an autonomous compliance auditor.
+
+Instead of simply answering questions, the system:
+
+✅ Retrieves evidence  
+✅ Validates relevance  
+✅ Corrects retrieval failures  
+✅ Cross-references regulations and policies  
+✅ Generates verifiable audit reports  
+
+---
+
+# ⚠️ The Problem
+
+Most Retrieval-Augmented Generation (RAG) systems operate using a linear workflow:
+
+```text
 User Query
     ↓
 Retrieve Documents
     ↓
 Generate Response
+```
 
-While effective for general information retrieval, this architecture suffers from:
+While effective for basic search applications, this architecture struggles with:
 
-Irrelevant document retrieval
-Hallucinated responses
-Lack of source validation
-No retrieval quality assessment
-Inability to compare multiple knowledge bases
+- Hallucinated responses
+- Irrelevant document retrieval
+- Lack of evidence validation
+- Poor reasoning across multiple sources
+- No self-correction mechanism
 
-These limitations make traditional RAG unsuitable for high-stakes environments such as compliance auditing, regulatory verification, and security governance.
+### Example
 
-Solution
+Imagine an internal company policy states:
 
-AgenticRAG-Orchestrator transforms RAG into a cyclic multi-agent workflow.
+> Data should be retained for 90 days.
 
+But a regulatory framework requires:
+
+> Data must not exceed 30 days of retention.
+
+A traditional RAG system may retrieve one document and summarize it.
+
+It cannot autonomously:
+
+- Retrieve both sources
+- Compare requirements
+- Detect compliance violations
+- Explain the discrepancy
+
+---
+
+# 💡 Solution
+
+AgenticRAG-Orchestrator introduces a **cyclic state-machine architecture** powered by LangGraph.
+
+The system continuously evaluates its own retrieval quality and loops back whenever necessary.
+
+```text
 User Query
       ↓
  Planner Agent
@@ -61,134 +104,211 @@ Reflection  |
      ↑
      |
 Self-Correction Loop
+```
 
-Instead of immediately generating a response, the system continuously evaluates retrieved information and retries retrieval when quality standards are not met.
+Unlike traditional RAG, retrieval is not considered successful until evidence quality is verified.
 
-Architecture
-1. Planner Agent
+---
 
-Responsible for:
+# 🧠 Multi-Agent Architecture
 
-Understanding user intent
-Breaking complex tasks into sub-problems
-Selecting appropriate knowledge sources
-Coordinating workflow execution
+## 1️⃣ Planner Agent
 
-Example:
+Acts as the project manager of the workflow.
 
-Query:
-"Does our cloud infrastructure comply with ISO 27001 encryption requirements?"
+### Responsibilities
 
-Planner Tasks:
+- Understand user intent
+- Decompose complex questions
+- Define retrieval strategy
+- Select appropriate knowledge sources
+- Coordinate downstream agents
 
-Retrieve ISO 27001 requirements
-Retrieve internal security policies
-Compare both datasets
-2. Retriever Agent
+### Example
 
-Responsible for:
+**Query**
 
-Semantic search
-Embedding generation
-Vector database retrieval
-Context collection
+```text
+Does our cloud infrastructure comply with ISO 27001 encryption requirements?
+```
 
-Supported Vector Databases:
+**Planner Output**
 
-Qdrant
-Pinecone
-ChromaDB
-3. Evaluator Agent (Corrective RAG)
+```text
+Task 1 → Retrieve ISO 27001 controls
 
-The Evaluator acts as a quality gate.
+Task 2 → Retrieve internal security policy
 
-It determines whether retrieved content actually answers the intended query.
+Task 3 → Compare both datasets
 
-Example:
+Task 4 → Generate compliance findings
+```
 
+---
+
+## 2️⃣ Retriever Agent
+
+Acts as the organization's AI librarian.
+
+### Responsibilities
+
+- Semantic search
+- Embedding generation
+- Vector similarity search
+- Context retrieval
+
+### Supported Vector Databases
+
+- Qdrant
+- Pinecone
+- ChromaDB
+
+---
+
+## 3️⃣ Evaluator Agent
+
+### Corrective RAG (CRAG)
+
+This agent is the quality control layer.
+
+Before any information is used, it evaluates whether retrieved context actually answers the requested question.
+
+### PASS Example
+
+```text
 Retrieved Context:
-Encryption keys must be stored securely.
 
-Evaluation:
+ISO 27001 requires encryption keys
+to be protected using secure key
+management processes.
+
+Result:
 PASS
+```
+
+### FAIL Example
+
+```text
 Retrieved Context:
-General cloud deployment instructions.
 
-Evaluation:
+Cloud deployment guide
+for virtual machines.
+
+Result:
 FAIL
+```
 
-Failed evaluations trigger automatic query reformulation and retrieval retries.
+### Self-Correction Loop
 
-4. Synthesizer Agent
+Whenever retrieval quality is poor:
 
-After validated context is collected, the Synthesizer:
+```text
+FAIL
+ ↓
+Rewrite Query
+ ↓
+Retrieve Again
+ ↓
+Re-Evaluate
+```
 
-Compares internal policies against regulations
-Identifies compliance gaps
-Generates findings
-Produces structured audit reports
-5. Reflection Agent
+This process continues until acceptable evidence is obtained.
 
-Before finalizing the response, the Reflection Agent verifies:
+---
 
-Citation completeness
-Logical consistency
-Evidence support
-Hallucination risk
+## 4️⃣ Synthesizer Agent
 
-Only verified outputs are returned to the user.
+After evidence is validated, the Synthesizer performs analysis.
 
-Key Features
-Multi-Agent Workflow
+### Responsibilities
 
-Specialized agents collaborate through a shared state.
+- Cross-reference policies
+- Compare regulations
+- Identify compliance gaps
+- Generate findings
+- Produce audit reports
 
-Corrective RAG (CRAG)
+### Example Output
 
-Automatically evaluates retrieval quality and retries failed searches.
+```text
+Finding #1
 
-Self-Reflective Generation
+Internal Policy:
+90-Day Log Retention
 
-Validates generated reports before delivery.
+ISO Requirement:
+30-Day Maximum Retention
 
-Dynamic Query Routing
+Status:
+NON-COMPLIANT
 
-Routes queries to the most relevant knowledge source.
+Risk Level:
+HIGH
+```
 
-Citation-Based Responses
+---
+
+## 5️⃣ Reflection Agent
+
+Inspired by Self-Reflective RAG techniques.
+
+Before releasing the final report, the agent verifies:
+
+- Citation completeness
+- Logical consistency
+- Evidence support
+- Hallucination risk
+
+Only verified conclusions are returned.
+
+---
+
+# ⚙️ Technical Highlights
+
+### 🔄 LangGraph State Machine
+
+Supports cyclic execution and iterative reasoning.
+
+### 🧩 Multi-Agent Collaboration
+
+Agents communicate through shared state.
+
+### 🔍 Dynamic Query Routing
+
+Automatically routes queries to:
+
+- Legal Documents
+- Internal Policies
+- Compliance Knowledge Bases
+
+### 📑 Citation-Backed Reports
 
 Every finding is linked to supporting evidence.
 
-LangGraph State Machine
+### 🛡️ Hallucination Reduction
 
-Supports iterative reasoning and self-correcting loops.
+Self-reflection ensures conclusions are evidence-driven.
 
-Technology Stack
-Layer	Technology
-Orchestration	LangGraph
-LLM	Google Gemini
-Embeddings	Gemini Embeddings
-Backend	Python
-API Framework	FastAPI
-Vector Database	Qdrant / Pinecone
-Environment Management	python-dotenv
-State Management	LangGraph StateGraph
-Example Use Cases
-Regulatory Compliance
-DPDP Act Audits
-GDPR Assessments
-ISO 27001 Verification
-SOC 2 Compliance Reviews
-Security Operations Centers (SOC)
-Data Retention Validation
-Access Control Audits
-Incident Response Reviews
-Security Policy Verification
-Enterprise Governance
-Internal Policy Review
-Risk Management Support
-Documentation Gap Analysis
-Project Workflow
+---
+
+# 🏗️ Technology Stack
+
+| Layer | Technology |
+|---------|------------|
+| Workflow Orchestration | LangGraph |
+| LLM | Google Gemini |
+| Embeddings | Gemini Embeddings |
+| Backend | Python |
+| API Layer | FastAPI |
+| Vector Database | Qdrant |
+| Environment Management | python-dotenv |
+| State Management | LangGraph StateGraph |
+
+---
+
+# 🔄 End-to-End Workflow
+
+```text
 User Query
       ↓
 Planner Agent
@@ -197,46 +317,112 @@ Retriever Agent
       ↓
 Evaluator Agent
       ↓
- ┌──────────────┐
- │ PASS / FAIL  │
- └──────┬───────┘
+ ┌─────────────┐
+ │ PASS / FAIL │
+ └──────┬──────┘
         │
-   FAIL │ PASS
-        │
-        ↓
-Retrieval Retry
+ FAIL   │   PASS
         │
         ↓
-Synthesizer Agent
+ Retrieval Retry
+        │
         ↓
-Reflection Agent
+ Synthesizer Agent
         ↓
-Final Audit Report
-Future Enhancements
-Multi-modal document processing
-Human-in-the-loop approval workflows
-Real-time compliance monitoring
-Agent memory persistence
-MCP integration
-Automated remediation recommendations
-Project Goals
+ Reflection Agent
+        ↓
+ Final Audit Report
+```
 
-The primary objective of AgenticRAG-Orchestrator is to transform LLMs from passive search-and-summarization tools into active, verifiable compliance auditors capable of:
+---
 
-Retrieving information
-Validating evidence
-Correcting retrieval failures
-Cross-referencing multiple sources
-Producing trustworthy audit reports
-Resume Summary
+# 🎯 Real-World Applications
 
-Built an Agentic RAG system using LangGraph, Google Gemini, and Qdrant that performs autonomous compliance auditing through self-correcting retrieval, document evaluation, and citation-backed report generation.
+## 📜 Regulatory Compliance
 
-License
+- DPDP Act Auditing
+- GDPR Assessments
+- ISO 27001 Verification
+- SOC 2 Reviews
+- PCI DSS Audits
 
-MIT License
+---
 
-Author
+## 🛡️ Security Operations Centers (SOC)
 
-Sreeram M R
-AI/ML Engineer | Applied AI | LLM Engineering | Agentic AI | RAG Systems
+- Log Retention Validation
+- Incident Response Reviews
+- Access Control Audits
+- Security Governance Assessments
+
+---
+
+## 🏢 Enterprise Governance
+
+- Internal Policy Verification
+- Documentation Gap Analysis
+- Risk Assessment Support
+- Regulatory Readiness Reviews
+
+---
+
+# 📈 Future Roadmap
+
+### Phase 1
+
+- [ ] Multi-modal document ingestion
+- [ ] PDF and image understanding
+- [ ] Human-in-the-loop validation
+
+### Phase 2
+
+- [ ] Persistent Agent Memory
+- [ ] Long-term compliance tracking
+- [ ] Multi-tenant architecture
+
+### Phase 3
+
+- [ ] MCP Integration
+- [ ] Autonomous remediation recommendations
+- [ ] Real-time compliance monitoring
+
+---
+
+# 🎯 Project Goal
+
+The objective of AgenticRAG-Orchestrator is to evolve Large Language Models from passive search tools into active enterprise auditors capable of:
+
+- Retrieving information
+- Evaluating evidence
+- Correcting retrieval failures
+- Cross-referencing regulations
+- Producing trustworthy audit reports
+
+Ultimately, the system aims to provide organizations with an AI-powered compliance analyst that operates with transparency, traceability, and verifiable reasoning.
+
+---
+
+# 📄 Resume Impact
+
+### Built an Agentic AI Compliance Auditor using LangGraph, Gemini, and Qdrant
+
+- Designed a multi-agent RAG architecture
+- Implemented Corrective RAG (CRAG)
+- Built self-correcting retrieval loops
+- Reduced hallucinations using reflection agents
+- Generated citation-backed compliance reports
+- Developed enterprise-grade AI workflow orchestration
+
+---
+
+# 👨‍💻 Author
+
+### Sreeram M R
+
+**AI/ML Engineer • Applied AI • LLM Engineering • Agentic AI • RAG Systems**
+
+> Building intelligent systems that can reason, verify, and act autonomously.
+
+---
+
+## ⭐ If you find this project useful, consider giving it a star!
