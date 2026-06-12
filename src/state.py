@@ -1,17 +1,14 @@
-from typing import List, TypedDict
+from typing import TypedDict, List
 
 class AuditorState(TypedDict):
-
     question: str
 
-    internal_docs: List[str]
+    document_type: str
 
     legal_docs: List[str]
 
-    generation: str
+    retrieval_grade: str
 
-    search_retries: int
+    audit_report: str
 
-    compliance_status: int
-
-    
+    retry_count: int
