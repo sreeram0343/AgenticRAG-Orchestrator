@@ -5,12 +5,6 @@ import requests
 import subprocess
 import streamlit as st
 
-# Force UTF-8 encoding for standard output on Windows to prevent emoji encoding crashes
-if sys.platform.startswith('win'):
-    import io
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
-    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
-
 # Backend Endpoint Configuration
 BACKEND_URL = "http://127.0.0.1:8000"
 
