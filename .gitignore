@@ -1,12 +1,17 @@
-# Environments
-.env
-venv/
-env/
-
-# Python caching
+# Python
 __pycache__/
 *.pyc
 
-# IDEs
+# Virtual Environments
+.venv/
+venv/
+
+# Secrets
+.env
+
+# Qdrant
+qdrant_storage/
+
+# IDE
 .vscode/
 .idea/
