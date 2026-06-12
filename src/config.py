@@ -7,8 +7,8 @@ load_dotenv()
 class Config:
     # LLM Settings
     GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
-    DEFAULT_MODEL = "gemini-1.5-flash"  # Fast and cost-effective for agent loops
-    ADVANCED_MODEL = "gemini-1.5-pro"   # Best for complex compliance reasoning
+    DEFAULT_MODEL = "gemini-3.5-flash"  # Fast and cost-effective for agent loops
+    ADVANCED_MODEL = "gemini-3.5-flash"   # Best for complex compliance reasoning
     
     # Vector DB Settings
     QDRANT_URL = os.getenv("QDRANT_URL")

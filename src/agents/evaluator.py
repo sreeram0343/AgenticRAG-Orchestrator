@@ -7,33 +7,39 @@ from langchain_core.prompts import PromptTemplate
 from src.state import AuditorState
 from src.config import Config
 
-# 1. Define the exact structure we want the AI to return
+# Define the structured output schema for the evaluator
 class GradeDocuments(BaseModel):
     """Binary score for relevance check on retrieved documents."""
-    binary_score: str = Field(description="Documents are relevant to the question, 'yes' or 'no'")
+    binary_score: str = Field(
+        description="Are the documents relevant to the question? Return 'yes' or 'no'"
+    )
 
-def evaluate_legal_relevance(state: AuditorState) -> Dict[str, Any]:
+def evaluate_documents(state: AuditorState) -> Dict[str, Any]:
     """
-    Agent 2: The Internal Inspector (Evaluator)
+    Agent: The Internal Inspector (Evaluator)
     Acts as a filter. Reads the documents pulled by the Retriever and discards
     any that do not actually help answer the specific compliance question.
+    Also updates the retrieval_grade in the state.
     """
     print("\n⚖️ [Agent: Evaluator] Grading retrieved legal clauses for strict relevance...")
     
     question = state["question"]
     documents = state.get("legal_docs", [])
     
-    # 2. Initialize the "Brain" of the Evaluator (Using Gemini 1.5 Flash for speed)
+    if not documents:
+        print("⚠️ [Agent: Evaluator] No documents retrieved. Grading search as FAIL.")
+        return {"legal_docs": [], "retrieval_grade": "fail"}
+    
+    # Initialize deterministic Gemini 1.5 Flash model
     llm = ChatGoogleGenerativeAI(
-        model="gemini-1.5-flash",
+        model=Config.DEFAULT_MODEL,
         api_key=Config.GEMINI_API_KEY,
-        temperature=0 # Temperature 0 makes it deterministic and strict
+        temperature=0
     )
     
-    # 3. Force the LLM to output our Pydantic schema
+    # Force structured output using the Pydantic schema
     structured_llm_grader = llm.with_structured_output(GradeDocuments)
     
-    # 4. Give the Agent its strict instructions
     system_prompt = """You are a strict, emotionless legal compliance evaluator. 
     Assess if the retrieved document contains ANY information relevant to answering the user's question. 
     If the document contains keywords, concepts, or clauses mathematically or legally related to the user's question, grade it as 'yes'.
@@ -45,21 +51,39 @@ def evaluate_legal_relevance(state: AuditorState) -> Dict[str, Any]:
         input_variables=["system", "question", "document"],
     )
     
-    # Combine the prompt and the LLM into a chain
+    # Chain prompt and structured LLM
     retriever_grader = grade_prompt | structured_llm_grader
     
-    # 5. Evaluate each document one by one
+    # Grade each document
     filtered_docs = []
     for d in documents:
-        # Ask the LLM to grade it
-        score = retriever_grader.invoke({"system": system_prompt, "question": question, "document": d})
-        grade = score.binary_score
+        doc_text = d["text"]
+        source_name = d.get("source", "unknown")
+        page_num = d.get("page", 0)
         
-        if grade.lower() == "yes":
-            print("   ✅ Valid legal clause found. Keeping in memory.")
-            filtered_docs.append(d)
-        else:
-            print("   ❌ Irrelevant legal clause detected. Discarding to prevent hallucinations.")
+        try:
+            score = retriever_grader.invoke({
+                "system": system_prompt, 
+                "question": question, 
+                "document": doc_text
+            })
+            grade = score.binary_score
             
-    # 6. Update the shared memory with only the verified, highly-relevant documents
-    return {"legal_docs": filtered_docs}
+            if grade.lower().strip() == "yes":
+                print(f"   ✅ Relevant: Chunk from '{source_name}' (Page {page_num}) kept.")
+                filtered_docs.append(d)
+            else:
+                print(f"   ❌ Irrelevant: Chunk from '{source_name}' (Page {page_num}) discarded.")
+        except Exception as e:
+            # Safe fallback: retain the document if evaluation fails to avoid dropping potential answers
+            print(f"   ⚠️ Error grading chunk from '{source_name}' page {page_num}: {e}. Retaining by default.")
+            filtered_docs.append(d)
+            
+    # Determine overall retrieval status
+    final_grade = "pass" if len(filtered_docs) > 0 else "fail"
+    print(f"⚖️ [Agent: Evaluator] Grading complete. Status: {final_grade.upper()} ({len(filtered_docs)}/{len(documents)} relevant documents).")
+    
+    return {
+        "legal_docs": filtered_docs,
+        "retrieval_grade": final_grade
+    }
