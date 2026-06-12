@@ -30,34 +30,34 @@ st.markdown("""
 
     /* Main App Container background */
     .stApp {
-        background: radial-gradient(circle at 80% 20%, #1e1b4b 0%, #0f172a 100%);
+        background: radial-gradient(circle at 80% 20%, #171f3a 0%, #0b1020 100%);
         color: #f8fafc;
         font-family: 'Inter', sans-serif;
     }
 
-    /* Sidebar Container Deep Black Background */
+    /* Sidebar Container Deep Navy Background */
     [data-testid="stSidebar"] {
-        background-color: #030712 !important;
-        border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+        background-color: #0b1020 !important;
+        border-right: 1px solid rgba(0, 212, 255, 0.08) !important;
     }
     
     /* Premium Header Banner */
     .header-card {
-        background: rgba(30, 41, 59, 0.45);
+        background: rgba(11, 16, 32, 0.65);
         backdrop-filter: blur(12px);
         -webkit-backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(0, 212, 255, 0.15);
         border-radius: 16px;
         padding: 32px;
         margin-bottom: 28px;
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35);
     }
     
     .header-title {
         font-family: 'Outfit', sans-serif;
         font-size: 2.6rem;
         font-weight: 800;
-        background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+        background: linear-gradient(135deg, #00e676 0%, #00d4ff 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin: 0 0 6px 0;
@@ -73,22 +73,22 @@ st.markdown("""
     
     /* Sleek Sidebar Card */
     .sidebar-card {
-        background: rgba(15, 23, 42, 0.6);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(11, 16, 32, 0.8);
+        border: 1px solid rgba(0, 212, 255, 0.08);
         border-radius: 12px;
         padding: 18px;
         margin-bottom: 16px;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
 
-    /* Pulsing Green Circle for API Health */
+    /* Pulsing Neon Emerald Circle for API Health */
     .pulse-green {
         display: inline-block;
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background: #22c55e;
-        box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+        background: #00e676;
+        box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.7);
         animation: pulse-green-anim 1.8s infinite;
         margin-right: 8px;
     }
@@ -96,15 +96,15 @@ st.markdown("""
     @keyframes pulse-green-anim {
         0% {
             transform: scale(0.95);
-            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+            box-shadow: 0 0 0 0 rgba(0, 230, 118, 0.7);
         }
         70% {
             transform: scale(1);
-            box-shadow: 0 0 0 8px rgba(34, 197, 94, 0);
+            box-shadow: 0 0 0 8px rgba(0, 230, 118, 0);
         }
         100% {
             transform: scale(0.95);
-            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+            box-shadow: 0 0 0 0 rgba(0, 230, 118, 0);
         }
     }
 
@@ -119,17 +119,17 @@ st.markdown("""
         margin-bottom: 8px;
     }
 
-    .badge-lease { background-color: rgba(56, 189, 248, 0.15); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.3); }
-    .badge-nda { background-color: rgba(167, 139, 250, 0.15); color: #c084fc; border: 1px solid rgba(167, 139, 250, 0.3); }
-    .badge-adoption { background-color: rgba(244, 114, 182, 0.15); color: #f9a8d4; border: 1px solid rgba(244, 114, 182, 0.3); }
-    .badge-trust { background-color: rgba(251, 191, 36, 0.15); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.3); }
-    .badge-property { background-color: rgba(52, 211, 153, 0.15); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.3); }
-    .badge-other { background-color: rgba(148, 163, 184, 0.15); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.3); }
+    .badge-lease { background-color: rgba(0, 212, 255, 0.12); color: #00d4ff; border: 1px solid rgba(0, 212, 255, 0.25); }
+    .badge-nda { background-color: rgba(124, 58, 237, 0.12); color: #7c3aed; border: 1px solid rgba(124, 58, 237, 0.25); }
+    .badge-adoption { background-color: rgba(124, 58, 237, 0.12); color: #7c3aed; border: 1px solid rgba(124, 58, 237, 0.25); }
+    .badge-trust { background-color: rgba(0, 230, 118, 0.12); color: #00e676; border: 1px solid rgba(0, 230, 118, 0.25); }
+    .badge-property { background-color: rgba(0, 230, 118, 0.12); color: #00e676; border: 1px solid rgba(0, 230, 118, 0.25); }
+    .badge-other { background-color: rgba(148, 163, 184, 0.12); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.25); }
 
     /* Custom Cards for Retrieved Clauses */
     .clause-card {
-        background: rgba(30, 41, 59, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(11, 16, 32, 0.4);
+        border: 1px solid rgba(0, 212, 255, 0.05);
         border-radius: 12px;
         padding: 18px;
         margin-bottom: 12px;
@@ -137,9 +137,9 @@ st.markdown("""
     }
 
     .clause-card:hover {
-        border-color: rgba(56, 189, 248, 0.25);
+        border-color: rgba(0, 212, 255, 0.35);
         transform: translateY(-2px);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     }
     
     /* Clean Sub-Headers */
@@ -154,10 +154,10 @@ st.markdown("""
     /* Tabs Styling */
     .stTabs [data-baseweb="tab-list"] {
         gap: 12px;
-        background-color: rgba(15, 23, 42, 0.4);
+        background-color: rgba(11, 16, 32, 0.5);
         padding: 6px;
         border-radius: 10px;
-        border: 1px solid rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(0, 212, 255, 0.08);
     }
 
     .stTabs [data-baseweb="tab"] {
@@ -171,14 +171,14 @@ st.markdown("""
     }
 
     .stTabs [data-baseweb="tab"]:hover {
-        color: #38bdf8;
-        background-color: rgba(255, 255, 255, 0.03);
+        color: #00d4ff;
+        background-color: rgba(255, 255, 255, 0.02);
     }
 
     .stTabs [aria-selected="true"] {
-        background-color: rgba(56, 189, 248, 0.12) !important;
-        color: #38bdf8 !important;
-        border: 1px solid rgba(56, 189, 248, 0.25) !important;
+        background-color: rgba(0, 230, 118, 0.12) !important;
+        color: #00e676 !important;
+        border: 1px solid rgba(0, 230, 118, 0.35) !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -186,7 +186,7 @@ st.markdown("""
 # --------------------------------------------------
 # Sidebar: Telemetry & Diagnostics
 # --------------------------------------------------
-st.sidebar.markdown("<h2 style='color: #38bdf8; font-family: \"Outfit\"; margin-bottom: 0px;'>Diagnostics</h2>", unsafe_allow_html=True)
+st.sidebar.markdown("<h2 style='color: #00d4ff; font-family: \"Outfit\"; margin-bottom: 0px;'>Diagnostics</h2>", unsafe_allow_html=True)
 st.sidebar.write("---")
 
 api_online = False
@@ -362,8 +362,8 @@ with tab_auditor:
                                             st.markdown(f"""
                                             <div class="clause-card">
                                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                                                    <strong style="color: #38bdf8;">Evidence Snippet #{idx + 1}</strong>
-                                                    <span style="font-size: 0.8rem; background: rgba(56, 189, 248, 0.1); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.2);">
+                                                    <strong style="color: #00d4ff;">Evidence Snippet #{idx + 1}</strong>
+                                                    <span style="font-size: 0.8rem; background: rgba(0, 212, 255, 0.08); padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(0, 212, 255, 0.2);">
                                                         Score: {doc['score']:.4f}
                                                     </span>
                                                 </div>
@@ -397,7 +397,7 @@ with tab_auditor:
                     
                     # Styled report block
                     st.markdown(f"""
-                    <div style="background: rgba(30, 41, 59, 0.25); border: 1px solid rgba(255, 255, 255, 0.05); padding: 24px; border-radius: 12px; margin-bottom: 20px;">
+                    <div style="background: rgba(11, 16, 32, 0.45); border: 1px solid rgba(0, 212, 255, 0.1); padding: 24px; border-radius: 12px; margin-bottom: 20px;">
                         {final_report}
                     </div>
                     """, unsafe_allow_html=True)
@@ -440,14 +440,14 @@ with tab_repository:
                 
                 with cols[idx % 3]:
                     st.markdown(f"""
-                    <div class="clause-card" style="border-left: 4px solid #38bdf8;">
+                    <div class="clause-card" style="border-left: 4px solid #00d4ff;">
                         <span style="font-size: 1.1rem; font-weight: bold; color: #f8fafc; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                             {file}
                         </span>
                         <span style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-top: 6px;">
                             Size: {file_size_kb:.1f} KB
                         </span>
-                        <span style="font-size: 0.85rem; color: #34d399; font-weight: 500; display: block; margin-top: 4px;">
+                        <span style="font-size: 0.85rem; color: #00e676; font-weight: 500; display: block; margin-top: 4px;">
                             Status: Available for Indexing
                         </span>
                     </div>
