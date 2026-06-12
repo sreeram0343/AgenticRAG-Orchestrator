@@ -19,7 +19,6 @@ BACKEND_URL = "http://127.0.0.1:8000"
 # --------------------------------------------------
 st.set_page_config(
     page_title="Agentic Legal Auditor",
-    page_icon="⚖️",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -181,7 +180,7 @@ st.markdown("""
 # --------------------------------------------------
 # Sidebar: Telemetry & Diagnostics
 # --------------------------------------------------
-st.sidebar.markdown("<h2 style='color: #38bdf8; font-family: \"Outfit\"; margin-bottom: 0px;'>⚙️ Diagnostics</h2>", unsafe_allow_html=True)
+st.sidebar.markdown("<h2 style='color: #38bdf8; font-family: \"Outfit\"; margin-bottom: 0px;'>Diagnostics</h2>", unsafe_allow_html=True)
 st.sidebar.write("---")
 
 api_online = False
@@ -230,7 +229,7 @@ st.sidebar.markdown(f"""
 st.sidebar.write("---")
 st.sidebar.markdown("""
 <div style="font-size: 0.85rem; color: #94a3b8; line-height: 1.4;">
-    <strong>💡 System Core Workflow:</strong><br>
+    <strong>System Core Workflow:</strong><br>
     1. Triage query using a gatekeeper classifier.<br>
     2. Retrieve legal context with metadata filters.<br>
     3. Audit context strictness using corrective-evaluations.<br>
@@ -244,23 +243,23 @@ st.sidebar.markdown("""
 # --------------------------------------------------
 st.markdown("""
 <div class="header-card">
-    <h1 class="header-title">⚖️ AGENTIC LEGAL COMPLIANCE AUDITOR</h1>
+    <h1 class="header-title">AGENTIC LEGAL COMPLIANCE AUDITOR</h1>
     <p class="header-subtitle">Multi-Agent Self-Correcting RAG Auditor & Citations Engine</p>
 </div>
 """, unsafe_allow_html=True)
 
 # Tabs
 tab_auditor, tab_repository, tab_ingestion = st.tabs([
-    "💼 Compliance Auditor", 
-    "📁 Document Repository", 
-    "⚙️ Database & Index Settings"
+    "Compliance Auditor", 
+    "Document Repository", 
+    "Database & Index Settings"
 ])
 
 # --------------------------------------------------
 # Tab 1: Compliance Auditor
 # --------------------------------------------------
 with tab_auditor:
-    st.markdown("<h3 class='sub-title'>🔍 Initiate Compliance Audit</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 class='sub-title'>Initiate Compliance Audit</h3>", unsafe_allow_html=True)
     
     question_input = st.text_area(
         "Enter your legal question, compliance standard, or policy query:",
@@ -269,7 +268,7 @@ with tab_auditor:
         placeholder="e.g. Do our confidentiality requirements apply after contract termination?"
     )
     
-    with st.expander("📝 Optional: Align Audit Against Company Internal Policies", expanded=False):
+    with st.expander("Optional: Align Audit Against Company Internal Policies", expanded=False):
         internal_input = st.text_area(
             "Paste internal corporate guidelines or rules to compare against (one statement per line):",
             value="Tenant must maintain building structures in good condition.\nTenant is responsible for any repair request under $500.",
@@ -281,14 +280,14 @@ with tab_auditor:
     internal_docs = [line.strip() for line in internal_input.split("\n") if line.strip()]
 
     # Run Compliance Audit button
-    if st.button("🚀 Run Multi-Agent Audit", use_container_width=True):
+    if st.button("Run Multi-Agent Audit", use_container_width=True):
         if not question_input.strip():
             st.warning("Please enter a legal query or question to audit.")
         elif not api_online:
             st.error("Cannot run audit: FastAPI Backend is offline. Start the backend with 'python src/app.py' first.")
         else:
             st.markdown("---")
-            st.markdown("<h3 class='sub-title'>🕵️‍♂️ Agent Collaboration Trace</h3>", unsafe_allow_html=True)
+            st.markdown("<h3 class='sub-title'>Agent Collaboration Trace</h3>", unsafe_allow_html=True)
             
             trace_status = st.status("Initializing agent coordinators...", expanded=True)
             
@@ -326,7 +325,7 @@ with tab_auditor:
                             for node_name, state_update in event_data.items():
                                 if node_name == "classifier":
                                     document_type = state_update.get("document_type", "Other")
-                                    trace_status.write(f"🔮 **Classifier Agent:** Triage complete. Categorized query domain as `{document_type}`.")
+                                    trace_status.write(f"**Classifier Agent:** Triage complete. Categorized query domain as `{document_type}`.")
                                     
                                     # Render badge
                                     badge_class = f"badge-{document_type.lower()}"
@@ -339,18 +338,18 @@ with tab_auditor:
                                     
                                 elif node_name == "retriever":
                                     legal_docs = state_update.get("legal_docs", [])
-                                    trace_status.write(f"🕵️‍♂️ **Retriever Agent:** Queried local index. Found `{len(legal_docs)}` candidate chunks.")
+                                    trace_status.write(f"**Retriever Agent:** Queried local index. Found `{len(legal_docs)}` candidate chunks.")
                                     
                                 elif node_name == "evaluator":
                                     legal_docs = state_update.get("legal_docs", [])
                                     retrieval_grade = state_update.get("retrieval_grade", "fail")
                                     trace_status.write(
-                                        f"⚖️ **Evaluator Agent:** Inspected candidates. Grading status: **{retrieval_grade.upper()}** "
+                                        f"**Evaluator Agent:** Inspected candidates. Grading status: **{retrieval_grade.upper()}** "
                                         f"({len(legal_docs)} relevant clauses retained)."
                                     )
                                     
                                     # Render the retrieved documents inside the expander live
-                                    with docs_expander_placeholder.expander("📚 View Retained Grounding Evidence & Citations", expanded=False):
+                                    with docs_expander_placeholder.expander("View Retained Grounding Evidence & Citations", expanded=False):
                                         if not legal_docs:
                                             st.write("No relevant documents retained.")
                                         for idx, doc in enumerate(legal_docs):
@@ -363,7 +362,7 @@ with tab_auditor:
                                                     </span>
                                                 </div>
                                                 <span style="font-size: 0.85rem; color: #94a3b8;">
-                                                    📄 Source: <strong>{doc['source']}</strong> | Page: <strong>{doc['page']}</strong>
+                                                    Source: <strong>{doc['source']}</strong> | Page: <strong>{doc['page']}</strong>
                                                 </span>
                                                 <p style="margin-top: 8px; font-style: italic; color: #cbd5e1; line-height: 1.4;">
                                                     "{doc['text']}"
@@ -375,20 +374,20 @@ with tab_auditor:
                                     retry_count = state_update.get("retry_count", 0)
                                     rewritten_query = state_update.get("search_query", "")
                                     trace_status.write(
-                                        f"🔄 **Query Rewriter Agent:** Quality evaluation failed. "
+                                        f"**Query Rewriter Agent:** Quality evaluation failed. "
                                         f"Initiating corrective loop `{retry_count}`. Optimizing keywords to: *\"{rewritten_query}\"*"
                                     )
                                     
                                 elif node_name == "synthesizer":
                                     final_report = state_update.get("audit_report", "")
-                                    trace_status.write("📝 **Synthesizer Agent:** Analysis complete. Formatting citation-backed report...")
+                                    trace_status.write("**Synthesizer Agent:** Analysis complete. Formatting citation-backed report...")
                 
                 if final_report:
-                    trace_status.update(label="✅ Audit completed successfully!", state="complete", expanded=False)
+                    trace_status.update(label="Audit completed successfully!", state="complete", expanded=False)
                     st.success("Auditing Complete!")
                     
                     st.markdown("---")
-                    st.markdown("<h3 class='sub-title'>📝 Citation-Backed Compliance Report</h3>", unsafe_allow_html=True)
+                    st.markdown("<h3 class='sub-title'>Citation-Backed Compliance Report</h3>", unsafe_allow_html=True)
                     
                     # Styled report block
                     st.markdown(f"""
@@ -399,25 +398,25 @@ with tab_auditor:
                     
                     # Download button
                     st.download_button(
-                        label="💾 Export Audit Report (Markdown)",
+                        label="Export Audit Report (Markdown)",
                         data=final_report,
                         file_name="compliance_audit_report.md",
                         mime="text/markdown",
                         use_container_width=True
                     )
                 else:
-                    trace_status.update(label="❌ Audit failed to compile report.", state="error", expanded=True)
+                    trace_status.update(label="Audit failed to compile report.", state="error", expanded=True)
                     st.error("Synthesizer failed to generate the report. Check backend console for API issues.")
                     
             except Exception as e:
-                trace_status.update(label="❌ System Connection Error.", state="error", expanded=True)
+                trace_status.update(label="System Connection Error.", state="error", expanded=True)
                 st.error(f"Could not connect to FastAPI server: {str(e)}")
 
 # --------------------------------------------------
 # Tab 2: Document Repository Manager
 # --------------------------------------------------
 with tab_repository:
-    st.markdown("<h3 class='sub-title'>📁 Document Repository Manager</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 class='sub-title'>Document Repository Manager</h3>", unsafe_allow_html=True)
     st.write("Below are the raw PDF documents located in your local raw storage folder:")
     
     raw_docs_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data", "raw_docs"))
@@ -437,7 +436,7 @@ with tab_repository:
                     st.markdown(f"""
                     <div class="clause-card" style="border-left: 4px solid #38bdf8;">
                         <span style="font-size: 1.1rem; font-weight: bold; color: #f1f5f9; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                            📄 {file}
+                            {file}
                         </span>
                         <span style="font-size: 0.85rem; color: #94a3b8; display: block; margin-top: 6px;">
                             Size: {file_size_kb:.1f} KB
@@ -454,23 +453,23 @@ with tab_repository:
 # Tab 3: Database & Index Settings
 # --------------------------------------------------
 with tab_ingestion:
-    st.markdown("<h3 class='sub-title'>⚙️ Database Settings & Re-Indexing</h3>", unsafe_allow_html=True)
+    st.markdown("<h3 class='sub-title'>Database Settings & Re-Indexing</h3>", unsafe_allow_html=True)
     st.write("Manage your persistent vector storage connection and trigger document re-indexing loops below:")
     
     if api_online:
-        st.info(f"📂 **Collection Name:** `legal_frameworks`  \n"
-                f"💾 **Storage Type:** Local Disk RocksDB  \n"
-                f"📍 **Persistent Directory Path:** `{db_persistent_path}`")
+        st.info(f"Collection Name: `legal_frameworks`  \n"
+                f"Storage Type: Local Disk RocksDB  \n"
+                f"Persistent Directory Path: `{db_persistent_path}`")
         st.success("Database Status: PERSISTED & ONLINE")
     else:
-        st.warning("⚠️ FastAPI Backend is offline. Ingestion status is currently unavailable.")
+        st.warning("FastAPI Backend is offline. Ingestion status is currently unavailable.")
         
     st.write("---")
-    st.markdown("<h4 class='sub-title'>🔄 Vector Database Re-Indexing Tool</h4>", unsafe_allow_html=True)
+    st.markdown("<h4 class='sub-title'>Vector Database Re-Indexing Tool</h4>", unsafe_allow_html=True)
     st.write("Upload new documents to `data/raw_docs/` and run the script below to rebuild the vector search indexes.")
     
     if st.button("Rebuild Vector Search Indexes", use_container_width=True):
-        st.markdown("### 🛠️ Ingestion Console Logs")
+        st.markdown("### Ingestion Console Logs")
         console_placeholder = st.empty()
         
         # Resolve absolute path to ingestion script
