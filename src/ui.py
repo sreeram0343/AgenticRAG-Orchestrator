@@ -31,7 +31,7 @@ st.markdown("""
     /* Main App Container background */
     .stApp {
         background: radial-gradient(circle at 80% 20%, #1e1b4b 0%, #0f172a 100%);
-        color: #f1f5f9;
+        color: #f8fafc;
         font-family: 'Inter', sans-serif;
     }
 
@@ -66,7 +66,7 @@ st.markdown("""
     
     .header-subtitle {
         font-size: 1.15rem;
-        color: #94a3b8;
+        color: #cbd5e1;
         margin: 0;
         font-weight: 400;
     }
@@ -119,12 +119,12 @@ st.markdown("""
         margin-bottom: 8px;
     }
 
-    .badge-lease { background-color: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3); }
-    .badge-nda { background-color: rgba(167, 139, 250, 0.15); color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.3); }
-    .badge-adoption { background-color: rgba(244, 114, 182, 0.15); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.3); }
-    .badge-trust { background-color: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); }
-    .badge-property { background-color: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); }
-    .badge-other { background-color: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.3); }
+    .badge-lease { background-color: rgba(56, 189, 248, 0.15); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.3); }
+    .badge-nda { background-color: rgba(167, 139, 250, 0.15); color: #c084fc; border: 1px solid rgba(167, 139, 250, 0.3); }
+    .badge-adoption { background-color: rgba(244, 114, 182, 0.15); color: #f9a8d4; border: 1px solid rgba(244, 114, 182, 0.3); }
+    .badge-trust { background-color: rgba(251, 191, 36, 0.15); color: #fde047; border: 1px solid rgba(251, 191, 36, 0.3); }
+    .badge-property { background-color: rgba(52, 211, 153, 0.15); color: #6ee7b7; border: 1px solid rgba(52, 211, 153, 0.3); }
+    .badge-other { background-color: rgba(148, 163, 184, 0.15); color: #cbd5e1; border: 1px solid rgba(148, 163, 184, 0.3); }
 
     /* Custom Cards for Retrieved Clauses */
     .clause-card {
@@ -163,7 +163,7 @@ st.markdown("""
     .stTabs [data-baseweb="tab"] {
         font-family: 'Outfit', sans-serif;
         font-weight: 600;
-        color: #94a3b8;
+        color: #cbd5e1;
         padding: 8px 18px;
         border-radius: 6px;
         border: none !important;
@@ -208,7 +208,7 @@ if api_online:
     <div class="sidebar-card">
         <span class="pulse-green"></span>
         <span style="color: #22c55e; font-weight: bold; font-family: 'Outfit';">API Backend Online</span><br>
-        <span style="font-size: 0.85rem; color: #94a3b8;">Orchestrator connected successfully</span>
+        <span style="font-size: 0.85rem; color: #cbd5e1;">Orchestrator connected successfully</span>
     </div>
     """, unsafe_allow_html=True)
 else:
@@ -216,7 +216,7 @@ else:
     <div class="sidebar-card" style="border-color: rgba(239, 68, 68, 0.3);">
         <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #ef4444; margin-right: 8px;"></span>
         <span style="color: #ef4444; font-weight: bold; font-family: 'Outfit';">API Backend Offline</span><br>
-        <span style="font-size: 0.85rem; color: #94a3b8;">Run "python src/app.py" to connect</span>
+        <span style="font-size: 0.85rem; color: #cbd5e1;">Run "python src/app.py" to connect</span>
     </div>
     """, unsafe_allow_html=True)
 
@@ -234,7 +234,7 @@ st.sidebar.markdown(f"""
 
 st.sidebar.write("---")
 st.sidebar.markdown("""
-<div style="font-size: 0.85rem; color: #94a3b8; line-height: 1.4;">
+<div style="font-size: 0.85rem; color: #cbd5e1; line-height: 1.4;">
     <strong>System Core Workflow:</strong><br>
     1. Triage query using a gatekeeper classifier.<br>
     2. Retrieve legal context with metadata filters.<br>
@@ -337,7 +337,7 @@ with tab_auditor:
                                     badge_class = f"badge-{document_type.lower()}"
                                     category_placeholder.markdown(f"""
                                     <div style="margin-top: 10px;">
-                                        <span style="color: #94a3b8; font-weight: 500;">Triage Classification:</span>
+                                        <span style="color: #e2e8f0; font-weight: 500;">Triage Classification:</span>
                                         <span class="category-badge {badge_class}">{document_type}</span>
                                     </div>
                                     """, unsafe_allow_html=True)
@@ -367,10 +367,10 @@ with tab_auditor:
                                                         Score: {doc['score']:.4f}
                                                     </span>
                                                 </div>
-                                                <span style="font-size: 0.85rem; color: #94a3b8;">
+                                                <span style="font-size: 0.85rem; color: #cbd5e1;">
                                                     Source: <strong>{doc['source']}</strong> | Page: <strong>{doc['page']}</strong>
                                                 </span>
-                                                <p style="margin-top: 8px; font-style: italic; color: #cbd5e1; line-height: 1.4;">
+                                                <p style="margin-top: 8px; font-style: italic; color: #f8fafc; line-height: 1.4;">
                                                     "{doc['text']}"
                                                 </p>
                                             </div>
@@ -441,10 +441,10 @@ with tab_repository:
                 with cols[idx % 3]:
                     st.markdown(f"""
                     <div class="clause-card" style="border-left: 4px solid #38bdf8;">
-                        <span style="font-size: 1.1rem; font-weight: bold; color: #f1f5f9; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                        <span style="font-size: 1.1rem; font-weight: bold; color: #f8fafc; display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                             {file}
                         </span>
-                        <span style="font-size: 0.85rem; color: #94a3b8; display: block; margin-top: 6px;">
+                        <span style="font-size: 0.85rem; color: #cbd5e1; display: block; margin-top: 6px;">
                             Size: {file_size_kb:.1f} KB
                         </span>
                         <span style="font-size: 0.85rem; color: #34d399; font-weight: 500; display: block; margin-top: 4px;">
