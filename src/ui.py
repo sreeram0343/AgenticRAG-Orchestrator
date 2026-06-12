@@ -174,6 +174,29 @@ st.markdown("""
         color: #00e676 !important;
         border: 1px solid rgba(0, 230, 118, 0.35) !important;
     }
+
+    /* Style all Streamlit buttons and download buttons */
+    div.stButton > button, div.stDownloadButton > button {
+        background-color: #111827 !important;
+        color: #f8fafc !important;
+        border: 1px solid rgba(0, 212, 255, 0.4) !important;
+        border-radius: 8px !important;
+        padding: 10px 24px !important;
+        font-weight: 600 !important;
+        font-family: 'Outfit', sans-serif !important;
+        transition: all 0.3s ease !important;
+    }
+
+    div.stButton > button:hover, div.stDownloadButton > button:hover {
+        background-color: #00e676 !important;
+        color: #0b1020 !important;
+        border-color: #00e676 !important;
+        box-shadow: 0 0 15px rgba(0, 230, 118, 0.4) !important;
+    }
+
+    div.stButton > button:active, div.stDownloadButton > button:active {
+        transform: scale(0.98) !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
