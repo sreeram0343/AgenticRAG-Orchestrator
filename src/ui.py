@@ -34,6 +34,12 @@ st.markdown("""
         color: #f1f5f9;
         font-family: 'Inter', sans-serif;
     }
+
+    /* Sidebar Container Deep Black Background */
+    [data-testid="stSidebar"] {
+        background-color: #030712 !important;
+        border-right: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
     
     /* Premium Header Banner */
     .header-card {
